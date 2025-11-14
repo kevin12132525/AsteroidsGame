@@ -1,72 +1,47 @@
-class Spaceship extends Floater  
-{   
- //your code here
- public Spaceship(){
-   corners = 7;
-   xCorners = new int[]{-20,-15,-15,-20, 2, 20, 2};   
-   yCorners = new int[]{-15,-8, 8, 15, 3, 0, -3};   
-   myColor = 100;
-   myCenterX = 400;
-   myCenterY = 400;
-   myXspeed = 0;
-   myYspeed = 0;
-   myPointDirection = 45;
- }
-   public void setPosition(double x, double y) {
-    myCenterX = x;
-    myCenterY = y;
-  }
-  public void setDirection(double d) {
-    myPointDirection = d;
-  }
-
-  public void setSpeed(double xs, double ys) {
-    myXspeed = xs;
-    myYspeed = ys;
-  }
-
-  public double getX() { return myCenterX; }
-  public double getY() { return myCenterY; }
-  public double getDirection() { return myPointDirection; }
-
-   public void hyperspace() {
-    myXspeed = 0;
-    myYspeed = 0;
-    myCenterX = (int)(Math.random()*600)+100;
-    myCenterY = (int)(Math.random()*600)+100;
-    myPointDirection = (int)(Math.random()*360);
-  }
-}
-/*
-  public void shoot(){
-    if(key == 'r'){
-      bullets = new Bullet[1000];
-      for(int i = 0; i < 1000; i++){
-          bullets[i] = new Bullet();
-      }    
-    }
-  }
-*/
-
-class SpaceshipBack extends Spaceship  
-{   
-    //your code here
-    public SpaceshipBack(){
-    corners = 5;
-    xCorners = new int[]{-24,-18,-18,-23, 23};   
-    yCorners = new int[]{-18,-11, 11, 18, 0};   
-    myColor = 255;
-  }
-}
-/*
-class Bullet extends Spaceship
+//your variable declarations here
+Spaceship bob;
+SpaceshipBack bobBackground;
+Star [] stars;
+//Bullet [] bullets;
+public void setup() 
 {
-  public Bullet(){
-  corners = 4;
-  xCorners = new int []{-2,-2,2,2};
-  yCorners = new int []{-2,2,2,-2};
-  myColor = 255;
+  background(0);
+  size(800,800);
+  bob = new Spaceship();
+  bobBackground = new SpaceshipBack();
+  stars = new Star[1000];
+  for(int i = 0; i < 1000; i++){
+    stars[i] = new Star();
+  }
+
+  keyPressed();
+}
+public void draw() 
+{
+  background(0);
+  //background stars
+  for(int i = 0; i < 1000; i++){
+    stars[i].show();
+  }
+  //ship outline
+  bobBackground.show();
+  bobBackground.move();
+  //ship
+  bob.show();
+  bob.move();
   
+  
+}
+public void keyPressed() {
+  if (key == 'w') { bob.accelerate(.4); bobBackground.accelerate(.4); }
+  if (key == 's') { bob.accelerate(-.04); bobBackground.accelerate(-.04); }
+  if (key == 'a') { bob.turn(-10); bobBackground.turn(-10); }
+  if (key == 'd') { bob.turn(10); bobBackground.turn(10); }
+
+  if (key == 'q') {
+    bob.hyperspace();
+    bobBackground.setSpeed(0,0);
+    bobBackground.setPosition(bob.getX(),bob.getY());
+    bobBackground.setDirection(bob.getDirection());
   }
 }
-*/
