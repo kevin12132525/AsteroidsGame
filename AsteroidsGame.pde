@@ -40,10 +40,10 @@ public void keyPressed(){
   if(key == 'd'){bob.myPointDirection +=10; bobBackground.myPointDirection +=10;}
 
   if(key == 'q'){
-    bob.myXspeed = 0; bob.myYspeed = 0; 
-    bob.myCenterX = (int)(Math.random()*600)+100; bob.myCenterY = (int)(Math.random()*600)+100;
-    bobBackground.myXspeed = 0; bobBackground.myYspeed = 0; 
+    bob.setSpeed(0,0);
+    bob.setPosition((int)(Math.random()*600)+100,(int)(Math.random()*600)+100);
+    bobBackground.setSpeed(0,0); 
     bobBackground.myCenterX = bob.myCenterX; bobBackground.myCenterY = bob.myCenterY;
-    bob.myPointDirection = (int)(Math.random()*360); bobBackground.myPointDirection = bob.myPointDirection;
+    bob.setDirection((int)(Math.random()*360)); bobBackground.myPointDirection = bob.myPointDirection;
   }
 }
