@@ -1,17 +1,21 @@
 //your variable declarations here
-Spaceship bob;
-SpaceshipBack bobBackground;
+Spaceship ship;
+SpaceshipBack shipBackground;
 Star [] stars;
+ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 //Bullet [] bullets;
 public void setup() 
 {
   background(0);
   size(800,800);
-  bob = new Spaceship();
-  bobBackground = new SpaceshipBack();
+  ship = new Spaceship();
+  shipBackground = new SpaceshipBack();
   stars = new Star[1000];
   for(int i = 0; i < 1000; i++){
     stars[i] = new Star();
+  }
+  for (int i = 0; i < 20; i++) {
+    asteroids.add(i, new Asteroid());
   }
 
   keyPressed();
@@ -24,26 +28,37 @@ public void draw()
     stars[i].show();
   }
   //ship outline
-  bobBackground.show();
-  bobBackground.move();
+  shipBackground.show();
+  shipBackground.move();
   //ship
-  bob.show();
-  bob.move();
-  
-  
+  ship.show();
+  ship.move();
+
+  for (int i = 0; i < asteroids.size(); i++) {
+    Asteroid a = asteroids.get(i);
+    asteroids.get(i).show();
+    asteroids.get(i).move();
+
+//collision
+    float d = dist((float)a.getX(), (float)a.getY(),(float)ship.myCenterX, (float)ship.myCenterY);
+    if (d < 25){
+      asteroids.remove(i);
+    }
+  }
 }
+
 public void keyPressed(){
-  if(key == 'w'){bob.accelerate(.4); bobBackground.accelerate(.4);}
+  if(key == 'w'){ship.accelerate(.2); shipBackground.accelerate(.2);}
   if(key == 's')
-  {bob.accelerate(-.04);bobBackground.accelerate(-.04);}
-  if(key == 'a'){bob.myPointDirection -=10; bobBackground.myPointDirection -=10;}
-  if(key == 'd'){bob.myPointDirection +=10; bobBackground.myPointDirection +=10;}
+  {ship.accelerate(-.02);shipBackground.accelerate(-.02);}
+  if(key == 'a'){ship.myPointDirection -=10; shipBackground.myPointDirection -=10;}
+  if(key == 'd'){ship.myPointDirection +=10; shipBackground.myPointDirection +=10;}
 
   if(key == 'q'){
-    bob.setSpeed(0,0);
-    bob.setPosition((int)(Math.random()*600)+100,(int)(Math.random()*600)+100);
-    bobBackground.setSpeed(0,0); 
-    bobBackground.myCenterX = bob.myCenterX; bobBackground.myCenterY = bob.myCenterY;
-    bob.setDirection((int)(Math.random()*360)); bobBackground.myPointDirection = bob.myPointDirection;
+    ship.setSpeed(0,0);
+    ship.setPosition((int)(Math.random()*600)+100,(int)(Math.random()*600)+100);
+    shipBackground.setSpeed(0,0); 
+    shipBackground.myCenterX = ship.myCenterX; shipBackground.myCenterY = ship.myCenterY;
+    ship.setDirection((int)(Math.random()*360)); shipBackground.myPointDirection = ship.myPointDirection;
   }
 }
