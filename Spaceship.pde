@@ -1,6 +1,8 @@
 class Spaceship extends Floater  
 {   
  //your code here
+ private double myHealth;
+ private double myScore;
  public Spaceship(){
    corners = 7;
    xCorners = new int[]{-20,-15,-15,-20, 2, 20, 2};   
@@ -11,6 +13,7 @@ class Spaceship extends Floater
    myXspeed = 0;
    myYspeed = 0;
    myPointDirection = 45;
+   myHealth = 100;
  }
    public void setPosition(double x, double y) {
     myCenterX = x;
@@ -29,10 +32,20 @@ class Spaceship extends Floater
     myXspeed = xs;
     myYspeed = ys;
   }
+  public void setHealth(double health) {
+    myHealth = health;
+  }
+  public void setScore(double s){
+    myScore = s;
+  }
 
   public double getX() { return myCenterX; }
   public double getY() { return myCenterY; }
+  public double getXspeed() { return myXspeed; }
+  public double getYspeed() { return myYspeed; }
   public double getDirection() { return myPointDirection; }
+  public double getHealth() { return myHealth; }
+  public double getScore()  { return myScore; }
 
    public void hyperspace() {
     setSpeed(0,0);
@@ -40,16 +53,6 @@ class Spaceship extends Floater
     setDirection((int)(Math.random()*360));
   }
 }
-/*
-  public void shoot(){
-    if(key == 'r'){
-      bullets = new Bullet[1000];
-      for(int i = 0; i < 1000; i++){
-          bullets[i] = new Bullet();
-      }    
-    }
-  }
-*/
 
 class SpaceshipBack extends Spaceship  
 {   
@@ -61,15 +64,3 @@ class SpaceshipBack extends Spaceship
     setmyColor(255);
   }
 }
-/*
-class Bullet extends Spaceship
-{
-  public Bullet(){
-  corners = 4;
-  xCorners = new int []{-2,-2,2,2};
-  yCorners = new int []{-2,2,2,-2};
-  myColor = 255;
-  
-  }
-}
-*/
