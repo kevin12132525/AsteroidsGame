@@ -55,6 +55,7 @@ class Asteroid extends Floater {
 
 class SmallAsteroid extends Asteroid {
   SmallAsteroid(){
+    corners = 8;
     xCorners = new int[]{15, 9, 0, -8, -13, -9, 0, 12};
     yCorners = new int[]{0, -8, -14, -9, 0, 10, 15, 10};
   }
