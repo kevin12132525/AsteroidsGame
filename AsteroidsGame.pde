@@ -23,7 +23,6 @@ public void setup()
   for (int i = 0; i < 5; i++) {
     smallasteroids.add(i, new SmallAsteroid());
   }
-  keyPressed();
 }
 public void draw()
 {
@@ -36,9 +35,9 @@ public void draw()
   //text
   textSize(48);
   fill(textRed, textGreen, 0);
-  text("Health:" + (int)ship.myHealth, 40, 60);
+  text("Health:" + (int)ship.getHealth(), 40, 60);
   fill(0, 0, 200);
-  text("Score:" + (int)ship.myScore, 40, 110);
+  text("Score:" + (int)ship.getScore(), 40, 110);
 
   //ship outline
   shipBack.show();
@@ -77,14 +76,14 @@ public void draw()
       }
     }
     //collision small  asteroid
-    float d = dist((float)s.getX(), (float)s.getY(), (float)ship.myCenterX, (float)ship.myCenterY);
+    float d = dist((float)s.getX(), (float)s.getY(), (float)ship.getX(), (float)ship.getY());
     if (d < 25) {
       smallasteroids.remove(i);
       ship.setHealth(ship.getHealth() - 25);
       textRed += 25;
       textGreen -= 25;
     }
-    if (ship.getHealth() <= 50 || ship.myScore > 100) {
+    if (ship.getHealth() <= 50 || ship.getScore() > 100) {
       s.accelerate(.01);
     }
   }//end of small asteroids loop
@@ -124,7 +123,7 @@ public void draw()
       }
     }
     //collision asteroid
-    float d = dist((float)a.getX(), (float)a.getY(), (float)ship.myCenterX, (float)ship.myCenterY);
+    float d = dist((float)a.getX(), (float)a.getY(), (float)ship.getX(), (float)ship.getY());
     if (d < 25) {
       asteroids.remove(i);
       ship.setHealth(ship.getHealth() - 25);
@@ -132,7 +131,7 @@ public void draw()
       textGreen -= 25;
     }
 
-    if (ship.getHealth() <= 50 || ship.myScore > 100) {
+    if (ship.getHealth() <= 50 || ship.getScore() > 100) {
       a.accelerate(.01);
     }
 
@@ -158,22 +157,21 @@ public void keyPressed() {
     shipBack.accelerate(-.05);
   }
   if (key == 'a') {
-    ship.myPointDirection -=10;
-    shipBack.myPointDirection -=10;
+    ship.setDirection(ship.getDirection() - 10);
+    shipBack.setDirection(ship.getDirection());
   }
   if (key == 'd') {
-    ship.myPointDirection +=10;
-    shipBack.myPointDirection +=10;
+    ship.setDirection(ship.getDirection() + 10);
+    shipBack.setDirection(ship.getDirection());
   }
 
   if (key == 'q') {
     ship.setSpeed(0, 0);
     ship.setPosition((int)(Math.random()*600)+100, (int)(Math.random()*600)+100);
     shipBack.setSpeed(0, 0);
-    shipBack.myCenterX = ship.myCenterX;
-    shipBack.myCenterY = ship.myCenterY;
+    shipBack.setPosition(ship.getX(),ship.getY());
     ship.setDirection((int)(Math.random()*360));
-    shipBack.myPointDirection = ship.myPointDirection;
+    shipBack.setDirection(ship.getDirection());
   }
   if (key == 'r') {
     bullets.add(new Bullet(ship));
