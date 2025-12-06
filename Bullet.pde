@@ -15,8 +15,8 @@ class Bullet extends Floater{
     ellipse((float)myCenterX, (float)myCenterY, diameter,diameter);
   }
   public void update() {
-    move();
     show();
+    move();
     life--;
   }
   public boolean isDead(){
