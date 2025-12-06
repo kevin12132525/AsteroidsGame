@@ -140,9 +140,9 @@ public void draw()
       rect(0, 0, 800, 800);
       textSize(128);
       fill(240, 220, 220);
-      text("GAME OVER", 80, 400);
+      text("GAME OVER", width/2, height/2);
       textSize(24);
-      text("Score: " + (int)ship.getScore(), 350, 450);
+      text("Score: " + (int)ship.getScore(), width/2, height/2 + 80);
     }
   } // end of asteroids for loop
 } // end of draw func
