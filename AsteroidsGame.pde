@@ -179,6 +179,3 @@ public void keyPressed() {
     bullets.add(new Bullet(ship));
   }
 }
-public void keyPressed() {
-    println("Key pressed: " + key);
-}
