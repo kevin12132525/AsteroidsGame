@@ -140,12 +140,14 @@ public void draw()
       rect(0, 0, 800, 800);
       textSize(128);
       fill(240, 220, 220);
-      text("GAME OVER", width/2 -350, height/2);
+      text("GAME OVER", width/2 -400, height/2);
       textSize(24);
       text("Score: " + (int)ship.getScore(), width/2-40, height/2 + 80);
     }
   } // end of asteroids for loop
 } // end of draw func
+
+
 public void keyPressed() {
   if (key == 'w') {
     ship.accelerate(.2);
@@ -176,4 +178,7 @@ public void keyPressed() {
   if (key == 'r') {
     bullets.add(new Bullet(ship));
   }
+}
+public void keyPressed() {
+    println("Key pressed: " + key);
 }
