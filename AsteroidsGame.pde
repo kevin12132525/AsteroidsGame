@@ -72,7 +72,6 @@ public void draw()
         smallasteroids.get(smallasteroids.size() - 1).setSpeed(s.getXspeed() +1, s.getYspeed() +1);
         ship.setScore(ship.getScore() + 5);
         j--;
-        i--;
       }
     }
     //collision small  asteroid
@@ -94,7 +93,7 @@ public void draw()
     asteroids.get(i).show();
     asteroids.get(i).move();
 
-    for (int j = 0; j < bullets.size(); j++) {
+    for (int j = bullets.size()-1; j >= 0; j--) {
       Bullet b = bullets.get(j);
 
       // bullet hits asteroid
@@ -118,8 +117,7 @@ public void draw()
 
         asteroids.remove(i);
         ship.setScore(ship.getScore() + 10);
-        j--;
-        i--;
+        break;
       }
     }
     //collision asteroid
@@ -132,7 +130,7 @@ public void draw()
     }
 
     if (ship.getHealth() <= 50 || ship.getScore() > 100) {
-      a.accelerate(.01);
+      a.accelerate(.03);
     }
 
     if (ship.getHealth() <= 0) {
@@ -143,6 +141,7 @@ public void draw()
       text("GAME OVER", width/2 -400, height/2);
       textSize(24);
       text("Score: " + (int)ship.getScore(), width/2-40, height/2 + 80);
+      noLoop();
     }
   } // end of asteroids for loop
 } // end of draw func
